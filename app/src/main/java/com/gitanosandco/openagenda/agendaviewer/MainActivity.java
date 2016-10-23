@@ -1,6 +1,7 @@
 package com.gitanosandco.openagenda.agendaviewer;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,8 +16,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class MainActivity extends AppCompatActivity {
-    private ViewPager viewPager;
-    private MyPagerAdapteur pagerAdapteur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +24,11 @@ public class MainActivity extends AppCompatActivity {
 
         initEventList();
 
-        pagerAdapteur = new MyPagerAdapteur(getSupportFragmentManager());
-        viewPager = (ViewPager) findViewById(R.id.a_main_vpager);
+        MyPagerAdapteur pagerAdapteur = new MyPagerAdapteur(getSupportFragmentManager());
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.a_main_tpager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.a_main_vpager);
         viewPager.setAdapter(pagerAdapteur);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     private void initEventList() {
