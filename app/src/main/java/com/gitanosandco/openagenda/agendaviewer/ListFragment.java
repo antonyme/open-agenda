@@ -18,8 +18,6 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class ListFragment extends Fragment {
-    ListView listView;
-    ListViewEventAdapter lvAdapteur;
 
     public ListFragment() {
     }
@@ -37,19 +35,6 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_list, container, false);
-        listView = (ListView) v.findViewById(R.id.f_list_lv);
-        lvAdapteur = new ListViewEventAdapter(
-                getContext(), EventListHolder.INSTANCE.getEventList());
-            listView.setAdapter(lvAdapteur);
-        return v;
-    }
-
-    public void updateEventList(List<EventModel> newList) {
-        if(lvAdapteur != null) {
-            lvAdapteur.clear();
-            lvAdapteur.addAll(newList);
-            lvAdapteur.notifyDataSetChanged();
-        }
+        return inflater.inflate(R.layout.fragment_list, container, false);
     }
 }

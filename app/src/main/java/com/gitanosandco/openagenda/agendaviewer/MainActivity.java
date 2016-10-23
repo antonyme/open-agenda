@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -38,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
                         Gson gson = new GsonBuilder().create();
                         EventListHolder.INSTANCE.setEventList(
                                 gson.fromJson(response, EventListModel.class).getEvents());
-                        if(pagerAdapteur != null) {
-                            pagerAdapteur.updateListFragmentData(EventListHolder.INSTANCE.getEventList());
-                        }
+                        ListView lv = (ListView) findViewById(R.id.f_list_lv);
+                        ListViewEventAdapter lvAdapteur = new ListViewEventAdapter(
+                                MainActivity.this, EventListHolder.INSTANCE.getEventList());
+                        lv.setAdapter(lvAdapteur);
                     }
                 },
                 new Response.ErrorListener() {
