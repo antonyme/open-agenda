@@ -41,6 +41,20 @@ public class MyPagerAdapteur extends FragmentPagerAdapter {
         return NB_TAB;
     }
 
+    @Override
+    public String getPageTitle(int position) {
+        switch (position) {
+            case 0:
+                return "List";
+            case 1:
+                return "Map";
+            case 2:
+                return "Info";
+            default:
+                return null;
+        }
+    }
+
     public void updateListFragmentData(List<EventModel> newData) {
         if(listFragment != null){
             listFragment.updateEventList(newData);
