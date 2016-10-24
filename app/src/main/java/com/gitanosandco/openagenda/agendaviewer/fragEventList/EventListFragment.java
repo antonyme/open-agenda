@@ -11,8 +11,6 @@ import com.gitanosandco.openagenda.agendaviewer.R;
 
 /**
  * A simple {@link ListFragment} subclass.
- * Use the {@link EventListFragment#newInstance} factory method to
- * create an instance of this fragment.
  */
 public class EventListFragment extends ListFragment {
 

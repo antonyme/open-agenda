@@ -1,4 +1,4 @@
-package com.gitanosandco.openagenda.agendaviewer.main;
+package com.gitanosandco.openagenda.agendaviewer.actMain;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;

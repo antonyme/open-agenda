@@ -1,4 +1,4 @@
-package com.gitanosandco.openagenda.agendaviewer.main;
+package com.gitanosandco.openagenda.agendaviewer.actMain;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

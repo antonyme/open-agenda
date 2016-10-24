@@ -30,14 +30,20 @@ public class ListViewEventAdapter extends ArrayAdapter<Event> {
         EventViewHolder eventViewHolder = (EventViewHolder) convertView.getTag();
         if(eventViewHolder == null) {
             eventViewHolder = new EventViewHolder();
-            eventViewHolder.title = (TextView) convertView.findViewById(R.id.a_main_txtv_lv);
+            eventViewHolder.title = (TextView) convertView.findViewById(R.id.f_list_row_title);
+            eventViewHolder.location = (TextView) convertView.findViewById(R.id.f_list_row_loc);
+            eventViewHolder.shortDesc = (TextView) convertView.findViewById(R.id.f_list_row_desc);
+            eventViewHolder.date = (TextView) convertView.findViewById(R.id.f_list_row_date);
             convertView.setTag(eventViewHolder);
         }
 
         Event event = getItem(position);
 
         assert event != null;
-        eventViewHolder.title.setText(String.valueOf(event.getUid()));
+        eventViewHolder.title.setText(String.valueOf(event.getTitle()));
+        eventViewHolder.location.setText(event.getLocationName());
+        eventViewHolder.shortDesc.setText(event.getDescription().getFr());
+        eventViewHolder.date.setText(event.getFirstDate());
 
         return convertView;
     }

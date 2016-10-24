@@ -1,21 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:background="@drawable/list_row_selector"
+    android:padding="8dp" >
 
-    <ImageView
-        android:id="@+id/a_main_imv_lv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:src="@android:drawable/ic_delete" />
+<!-- Thumbnail Image -->
+<com.android.volley.toolbox.NetworkImageView
+    android:id="@+id/f_list_row_img"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:layout_alignParentLeft="true"
+    android:layout_marginRight="8dp" />
 
-    <TextView
-        android:id="@+id/a_main_txtv_lv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Message" />
+<!-- Title -->
+<TextView
+    android:id="@+id/f_list_row_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@+id/f_list_row_img"
+    android:layout_toRightOf="@+id/f_list_row_img"
+    android:textSize="@dimen/title"
+    android:textStyle="bold" />
 
-</LinearLayout>
+<!-- Location -->
+<TextView
+    android:id="@+id/f_list_row_loc"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/f_list_row_title"
+    android:layout_marginTop="1dip"
+    android:layout_toRightOf="@+id/f_list_row_img"
+    android:textSize="@dimen/rating" />
+
+<!-- Short Description -->
+<TextView
+    android:id="@+id/f_list_row_desc"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/f_list_row_loc"
+    android:layout_marginTop="5dp"
+    android:layout_toRightOf="@+id/f_list_row_img"
+    android:textColor="@color/genre"
+    android:textSize="@dimen/genre" />
+
+<!-- Date -->
+<TextView
+    android:id="@+id/f_list_row_date"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:textColor="@color/year"
+    android:textSize="@dimen/year" />
+
+</RelativeLayout>
