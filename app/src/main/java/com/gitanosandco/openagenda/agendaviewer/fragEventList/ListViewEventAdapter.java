@@ -9,14 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.gitanosandco.openagenda.agendaviewer.R;
-import com.gitanosandco.openagenda.agendaviewer.api.EventModel;
+import com.gitanosandco.openagenda.agendaviewer.model.Event;
 
 import java.util.ArrayList;
 
-public class ListViewEventAdapter extends ArrayAdapter<EventModel> {
+public class ListViewEventAdapter extends ArrayAdapter<Event> {
 
     public ListViewEventAdapter(Context context) {
-        super(context, 0, new ArrayList<EventModel>());
+        super(context, 0, new ArrayList<Event>());
     }
 
     @NonNull
@@ -34,7 +34,7 @@ public class ListViewEventAdapter extends ArrayAdapter<EventModel> {
             convertView.setTag(eventViewHolder);
         }
 
-        EventModel event = getItem(position);
+        Event event = getItem(position);
 
         assert event != null;
         eventViewHolder.title.setText(String.valueOf(event.getUid()));

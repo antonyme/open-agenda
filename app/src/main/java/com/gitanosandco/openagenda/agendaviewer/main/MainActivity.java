@@ -12,7 +12,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.gitanosandco.openagenda.agendaviewer.Config;
 import com.gitanosandco.openagenda.agendaviewer.R;
-import com.gitanosandco.openagenda.agendaviewer.api.EventListModel;
+import com.gitanosandco.openagenda.agendaviewer.model.Agenda;
 import com.gitanosandco.openagenda.agendaviewer.api.RequestHolder;
 import com.gitanosandco.openagenda.agendaviewer.fragEventList.ListViewEventAdapter;
 import com.google.gson.Gson;
@@ -32,27 +32,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.a_main_vpager);
 
         setupViewPager();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                Config.URL_AGENDA,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Gson gson = new GsonBuilder().create();
-                        lvAdapter.clear();
-                        lvAdapter.addAll(
-                                gson.fromJson(response, EventListModel.class).getEvents());
-                        lvAdapter.notifyDataSetChanged();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("network", "API call failed");
-                    }
-                }
-        );
-        RequestHolder.getInstance().getRequestQueue(MainActivity.this).add(stringRequest);
+        loadEventList();
     }
 
     @Override
@@ -70,5 +50,28 @@ public class MainActivity extends AppCompatActivity {
         MyPagerAdapteur pagerAdapteur = new MyPagerAdapteur(getSupportFragmentManager(), lvAdapter);
         viewPager.setAdapter(pagerAdapteur);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void loadEventList() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                Config.URL_AGENDA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Gson gson = new GsonBuilder().create();
+                        lvAdapter.clear();
+                        lvAdapter.addAll(
+                                gson.fromJson(response, Agenda.class).getEvents());
+                        lvAdapter.notifyDataSetChanged();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("network", "API call failed");
+                    }
+                }
+        );
+        RequestHolder.getInstance().getRequestQueue(MainActivity.this).add(stringRequest);
     }
 }
