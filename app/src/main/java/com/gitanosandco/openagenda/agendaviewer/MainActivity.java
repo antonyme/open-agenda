@@ -2,6 +2,7 @@ package com.gitanosandco.openagenda.agendaviewer;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,17 +17,36 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class MainActivity extends AppCompatActivity {
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private ListFragment eventListFragment;
+    private ListViewEventAdapter lvAdapteur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initEventList();
+        tabLayout = (TabLayout) findViewById(R.id.a_main_tpager);
+        viewPager = (ViewPager) findViewById(R.id.a_main_vpager);
+        eventListFragment = (ListFragment) getSupportFragmentManager().findFragmentById(R.id.f_list);
 
-        MyPagerAdapteur pagerAdapteur = new MyPagerAdapteur(getSupportFragmentManager());
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.a_main_tpager);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.a_main_vpager);
+        initEventList();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        setupViewPager();
+    }
+
+    private void setupViewPager() {
+        //eventList
+        lvAdapteur = new ListViewEventAdapter(MainActivity.this);
+
+        //viewPager
+        MyPagerAdapteur pagerAdapteur = new MyPagerAdapteur(getSupportFragmentManager(), lvAdapteur);
         viewPager.setAdapter(pagerAdapteur);
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -38,12 +58,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Gson gson = new GsonBuilder().create();
-                        EventListHolder.INSTANCE.setEventList(
+                        lvAdapteur.clear();
+                        lvAdapteur.addAll(
                                 gson.fromJson(response, EventListModel.class).getEvents());
-                        ListView lv = (ListView) findViewById(R.id.f_list_lv);
-                        ListViewEventAdapter lvAdapteur = new ListViewEventAdapter(
-                                MainActivity.this, EventListHolder.INSTANCE.getEventList());
-                        lv.setAdapter(lvAdapteur);
+                        lvAdapteur.notifyDataSetChanged();
+
                     }
                 },
                 new Response.ErrorListener() {

@@ -3,24 +3,25 @@ package com.gitanosandco.openagenda.agendaviewer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
-import com.gitanosandco.openagenda.agendaviewer.api.EventModel;
-
-import java.util.List;
+import android.widget.ListAdapter;
 
 import static com.gitanosandco.openagenda.agendaviewer.Config.NB_TAB;
 
 public class MyPagerAdapteur extends FragmentPagerAdapter {
+    ListAdapter lvAdapter;
 
-    public MyPagerAdapteur(FragmentManager fm) {
+    public MyPagerAdapteur(FragmentManager fm, ListAdapter lvAdapter) {
         super(fm);
+        this.lvAdapter = lvAdapter;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return ListFragment.newInstance();
+                EventListFragment eventListFragment = new EventListFragment();
+                eventListFragment.setListAdapter(lvAdapter);
+                return eventListFragment;
             case 1:
                 return MapFragment.newInstance();
             case 2:

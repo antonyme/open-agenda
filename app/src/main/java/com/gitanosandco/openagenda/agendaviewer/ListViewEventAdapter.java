@@ -10,12 +10,13 @@ import android.widget.TextView;
 
 import com.gitanosandco.openagenda.agendaviewer.api.EventModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListViewEventAdapter extends ArrayAdapter<EventModel> {
 
-    public ListViewEventAdapter(Context context, List<EventModel> objects) {
-        super(context, 0, objects);
+    public ListViewEventAdapter(Context context) {
+        super(context, 0, new ArrayList<EventModel>());
     }
 
     @NonNull

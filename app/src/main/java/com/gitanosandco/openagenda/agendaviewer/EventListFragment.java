@@ -2,24 +2,19 @@ package com.gitanosandco.openagenda.agendaviewer;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link ListFragment#newInstance} factory method to
+ * A simple {@link ListFragment} subclass.
+ * Use the {@link EventListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListFragment extends Fragment {
+public class EventListFragment extends ListFragment {
 
-    public ListFragment() {
-    }
-
-    public static ListFragment newInstance() {
-        ListFragment fragment = new ListFragment();
-        return fragment;
+    public EventListFragment() {
     }
 
     @Override
