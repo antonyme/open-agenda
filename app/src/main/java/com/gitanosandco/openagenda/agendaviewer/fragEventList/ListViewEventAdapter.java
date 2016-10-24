@@ -15,7 +15,6 @@ import com.gitanosandco.openagenda.agendaviewer.R;
 import com.gitanosandco.openagenda.agendaviewer.api.RequestHolder;
 import com.gitanosandco.openagenda.agendaviewer.model.Event;
 
-import java.net.URLDecoder;
 import java.util.ArrayList;
 
 public class ListViewEventAdapter extends ArrayAdapter<Event> {

@@ -1,5 +1,6 @@
 package com.gitanosandco.openagenda.agendaviewer.actMain;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -12,13 +13,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.gitanosandco.openagenda.agendaviewer.Config;
 import com.gitanosandco.openagenda.agendaviewer.R;
+import com.gitanosandco.openagenda.agendaviewer.actDetail.DetailActivity;
+import com.gitanosandco.openagenda.agendaviewer.fragEventList.EventListFragment;
 import com.gitanosandco.openagenda.agendaviewer.model.Agenda;
 import com.gitanosandco.openagenda.agendaviewer.api.RequestHolder;
 import com.gitanosandco.openagenda.agendaviewer.fragEventList.ListViewEventAdapter;
+import com.gitanosandco.openagenda.agendaviewer.model.Event;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+public class MainActivity extends AppCompatActivity implements EventListFragment.ListFragmentItemClickListener {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ListViewEventAdapter lvAdapter;
@@ -73,5 +79,12 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
         RequestHolder.getInstance().getRequestQueue(MainActivity.this).add(stringRequest);
+    }
+
+    @Override
+    public void onListFragmentItemClick(Event event) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("event", event);
+        this.startActivity(intent);
     }
 }
