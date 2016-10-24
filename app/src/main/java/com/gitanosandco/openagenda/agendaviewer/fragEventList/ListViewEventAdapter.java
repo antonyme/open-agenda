@@ -5,12 +5,17 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.gitanosandco.openagenda.agendaviewer.R;
+import com.gitanosandco.openagenda.agendaviewer.api.RequestHolder;
 import com.gitanosandco.openagenda.agendaviewer.model.Event;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 public class ListViewEventAdapter extends ArrayAdapter<Event> {
@@ -26,10 +31,12 @@ public class ListViewEventAdapter extends ArrayAdapter<Event> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_layout,
                     parent, false);
         }
+        ImageLoader imageLoader = RequestHolder.getInstance().getImageLoader(getContext());
 
         EventViewHolder eventViewHolder = (EventViewHolder) convertView.getTag();
         if(eventViewHolder == null) {
             eventViewHolder = new EventViewHolder();
+            eventViewHolder.image = (NetworkImageView) convertView.findViewById(R.id.f_list_row_img);
             eventViewHolder.title = (TextView) convertView.findViewById(R.id.f_list_row_title);
             eventViewHolder.location = (TextView) convertView.findViewById(R.id.f_list_row_loc);
             eventViewHolder.shortDesc = (TextView) convertView.findViewById(R.id.f_list_row_desc);
@@ -40,7 +47,15 @@ public class ListViewEventAdapter extends ArrayAdapter<Event> {
         Event event = getItem(position);
 
         assert event != null;
-        eventViewHolder.title.setText(String.valueOf(event.getTitle()));
+        eventViewHolder.image.setDefaultImageResId(R.drawable.ic_loading_120dp);
+        eventViewHolder.image.setErrorImageResId(R.drawable.ic_error_120dp);
+        if(URLUtil.isValidUrl(event.getThumbnail())) {
+            eventViewHolder.image.setImageUrl(event.getThumbnail(), imageLoader);
+        }
+        else {
+            eventViewHolder.image.setImageResource(R.drawable.ic_image_120dp);
+        }
+        eventViewHolder.title.setText(event.getTitle().getFr());
         eventViewHolder.location.setText(event.getLocationName());
         eventViewHolder.shortDesc.setText(event.getDescription().getFr());
         eventViewHolder.date.setText(event.getFirstDate());

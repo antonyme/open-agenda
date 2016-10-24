@@ -3,7 +3,9 @@ package com.gitanosandco.openagenda.agendaviewer.api;
 import android.content.Context;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.gitanosandco.openagenda.agendaviewer.util.LruBitmapCache;
 
 /**
  * Singleton to hold the requestQueue
@@ -11,6 +13,7 @@ import com.android.volley.toolbox.Volley;
 public class RequestHolder {
     private static RequestHolder instance;
     private RequestQueue requestQueue;
+    private ImageLoader imageLoader;
 
     private RequestHolder() {
     }
@@ -27,5 +30,14 @@ public class RequestHolder {
             requestQueue = Volley.newRequestQueue(context.getApplicationContext());
         }
         return requestQueue;
+    }
+
+    public ImageLoader getImageLoader(Context context) {
+        getRequestQueue(context);
+        if (imageLoader == null) {
+            imageLoader = new ImageLoader(this.requestQueue,
+                    new LruBitmapCache());
+        }
+        return imageLoader;
     }
 }
