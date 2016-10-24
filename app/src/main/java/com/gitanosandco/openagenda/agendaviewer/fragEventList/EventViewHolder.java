@@ -1,4 +1,4 @@
-package com.gitanosandco.openagenda.agendaviewer;
+package com.gitanosandco.openagenda.agendaviewer.fragEventList;
 
 import android.widget.TextView;
 

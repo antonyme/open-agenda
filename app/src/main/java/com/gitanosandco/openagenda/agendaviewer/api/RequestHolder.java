@@ -1,4 +1,4 @@
-package com.gitanosandco.openagenda.agendaviewer;
+package com.gitanosandco.openagenda.agendaviewer.api;
 
 import android.content.Context;
 

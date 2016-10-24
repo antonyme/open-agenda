@@ -1,4 +1,4 @@
-package com.gitanosandco.openagenda.agendaviewer;
+package com.gitanosandco.openagenda.agendaviewer.fragEventList;
 
 
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.gitanosandco.openagenda.agendaviewer.R;
 
 /**
  * A simple {@link ListFragment} subclass.

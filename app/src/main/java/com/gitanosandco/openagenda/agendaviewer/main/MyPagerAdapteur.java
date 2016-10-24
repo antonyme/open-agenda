@@ -1,9 +1,13 @@
-package com.gitanosandco.openagenda.agendaviewer;
+package com.gitanosandco.openagenda.agendaviewer.main;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.widget.ListAdapter;
+
+import com.gitanosandco.openagenda.agendaviewer.fragInfo.InfoFragment;
+import com.gitanosandco.openagenda.agendaviewer.fragEventList.EventListFragment;
+import com.gitanosandco.openagenda.agendaviewer.fragMap.MapFragment;
 
 import static com.gitanosandco.openagenda.agendaviewer.Config.NB_TAB;
 

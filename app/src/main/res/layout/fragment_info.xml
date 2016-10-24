@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gitanosandco.openagenda.agendaviewer.MapFragment">
+    tools:context="com.gitanosandco.openagenda.agendaviewer.fragMap.MapFragment">
 
     <!-- TODO: Update info fragment layout -->
     <TextView

@@ -1,4 +1,4 @@
-package com.gitanosandco.openagenda.agendaviewer;
+package com.gitanosandco.openagenda.agendaviewer.fragEventList;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.gitanosandco.openagenda.agendaviewer.R;
 import com.gitanosandco.openagenda.agendaviewer.api.EventModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListViewEventAdapter extends ArrayAdapter<EventModel> {
 

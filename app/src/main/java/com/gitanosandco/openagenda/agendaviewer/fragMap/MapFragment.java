@@ -1,4 +1,4 @@
-package com.gitanosandco.openagenda.agendaviewer;
+package com.gitanosandco.openagenda.agendaviewer.fragMap;
 
 
 import android.os.Bundle;
@@ -7,18 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gitanosandco.openagenda.agendaviewer.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link InfoFragment#newInstance} factory method to
+ * Use the {@link MapFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class InfoFragment extends Fragment {
+public class MapFragment extends Fragment {
 
-    public InfoFragment() {
+    public MapFragment() {
     }
 
-    public static InfoFragment newInstance() {
-        InfoFragment fragment = new InfoFragment();
+    public static MapFragment newInstance() {
+        MapFragment fragment = new MapFragment();
         return fragment;
     }
 
@@ -28,6 +30,7 @@ public class InfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_info, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_map, container, false);
     }
 }
