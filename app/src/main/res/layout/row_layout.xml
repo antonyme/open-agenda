@@ -7,7 +7,7 @@
 
 <!-- Thumbnail Image -->
 <com.android.volley.toolbox.NetworkImageView
-    android:id="@+id/f_list_row_img"
+    android:id="@+id/img_details"
     android:layout_width="80dp"
     android:layout_height="80dp"
     android:layout_alignParentLeft="true"
@@ -18,8 +18,8 @@
     android:id="@+id/f_list_row_title"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignTop="@+id/f_list_row_img"
-    android:layout_toRightOf="@+id/f_list_row_img"
+    android:layout_alignTop="@+id/img_details"
+    android:layout_toRightOf="@+id/img_details"
     android:textSize="@dimen/title"
     android:textStyle="bold" />
 
@@ -30,7 +30,7 @@
     android:layout_height="wrap_content"
     android:layout_below="@id/f_list_row_title"
     android:layout_marginTop="1dip"
-    android:layout_toRightOf="@+id/f_list_row_img"
+    android:layout_toRightOf="@+id/img_details"
     android:textSize="@dimen/rating" />
 
 <!-- Short Description -->
@@ -40,7 +40,7 @@
     android:layout_height="wrap_content"
     android:layout_below="@id/f_list_row_loc"
     android:layout_marginTop="5dp"
-    android:layout_toRightOf="@+id/f_list_row_img"
+    android:layout_toRightOf="@+id/img_details"
     android:textColor="@color/genre"
     android:textSize="@dimen/genre" />
 

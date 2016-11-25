@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.URLUtil;
 import android.widget.ArrayAdapter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -17,7 +18,7 @@ import com.gitanosandco.openagenda.agendaviewer.model.Event;
 
 import java.util.ArrayList;
 
-public class ListViewEventAdapter extends ArrayAdapter<Event> {
+public class ListViewEventAdapter extends ArrayAdapter<Event> implements Filterable {
 
     public ListViewEventAdapter(Context context) {
         super(context, 0, new ArrayList<Event>());
@@ -35,7 +36,7 @@ public class ListViewEventAdapter extends ArrayAdapter<Event> {
         EventViewHolder eventViewHolder = (EventViewHolder) convertView.getTag();
         if(eventViewHolder == null) {
             eventViewHolder = new EventViewHolder();
-            eventViewHolder.image = (NetworkImageView) convertView.findViewById(R.id.f_list_row_img);
+            eventViewHolder.image = (NetworkImageView) convertView.findViewById(R.id.img_details);
             eventViewHolder.title = (TextView) convertView.findViewById(R.id.f_list_row_title);
             eventViewHolder.location = (TextView) convertView.findViewById(R.id.f_list_row_loc);
             eventViewHolder.shortDesc = (TextView) convertView.findViewById(R.id.f_list_row_desc);
@@ -60,5 +61,9 @@ public class ListViewEventAdapter extends ArrayAdapter<Event> {
         eventViewHolder.date.setText(event.getFirstDate());
 
         return convertView;
+    }
+
+    public void setTextFilterEnabled(boolean textFilterEnabled) {
+        this.textFilterEnabled = textFilterEnabled;
     }
 }

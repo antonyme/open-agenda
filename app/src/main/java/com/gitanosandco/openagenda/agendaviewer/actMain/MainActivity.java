@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements EventListFragment
                         lvAdapter.addAll(
                                 gson.fromJson(response, Agenda.class).getEvents());
                         lvAdapter.notifyDataSetChanged();
+
                     }
                 },
                 new Response.ErrorListener() {

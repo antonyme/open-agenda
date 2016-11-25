@@ -24,7 +24,9 @@ public class MyPagerAdapteur extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 EventListFragment eventListFragment = new EventListFragment();
+
                 eventListFragment.setListAdapter(lvAdapter);
+
                 return eventListFragment;
             case 1:
                 return MapFragment.newInstance();

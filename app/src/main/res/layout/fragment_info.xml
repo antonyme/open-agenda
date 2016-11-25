@@ -5,9 +5,29 @@
     tools:context="com.gitanosandco.openagenda.agendaviewer.fragMap.MapFragment">
 
     <!-- TODO: Update info fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="info fragment" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold|italic"
+            android:id="@+id/Developers"
+            android:text="Application Process developed by Guillame Duliscouët and Carlos Quesada." />
+
+            <TextView
+                android:text="In this application, you can see the data downloaded from the following server:  https://openagenda.com/  It is a site where you can create agendas in your liking and filling it with events. In this application we have selected an existing agenda ( https://openagenda.com/agendas/77951488/events.json?limit=100 ).   Llibreries in this project:       compile FileTree (include: [ '* .jar'], dir: 'libs')      compile 'com.android.support:appcompat-v7:24.2.1'      compile 'com.android.volley: volley: 1.0.0'      compile 'com.google.code.gson: GSON: 2.7'      compile 'com.android.support:design:24.2.1'      compile 'com.android.support:support-v4:24.2.1'      compile 'org.glassfish: javax.annotation: 10.0-b28'      compile 'com.google.android.gms: play-services-maps: 9.6.0'     &quot;Mieux vaut tard que jamais&quot; "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Description" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
