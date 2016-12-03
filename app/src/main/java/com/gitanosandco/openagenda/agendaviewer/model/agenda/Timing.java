@@ -1,5 +1,5 @@
 
-package com.gitanosandco.openagenda.agendaviewer.model;
+package com.gitanosandco.openagenda.agendaviewer.model.agenda;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;

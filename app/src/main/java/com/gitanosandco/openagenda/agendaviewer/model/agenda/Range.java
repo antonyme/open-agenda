@@ -1,5 +1,5 @@
 
-package com.gitanosandco.openagenda.agendaviewer.model;
+package com.gitanosandco.openagenda.agendaviewer.model.agenda;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 @Generated("org.jsonschema2pojo")
-public class Title implements Serializable {
+public class Range implements Serializable {
 
     @SerializedName("fr")
     @Expose
@@ -18,14 +18,14 @@ public class Title implements Serializable {
      * No args constructor for use in serialization
      * 
      */
-    public Title() {
+    public Range() {
     }
 
     /**
      * 
      * @param fr
      */
-    public Title(String fr) {
+    public Range(String fr) {
         this.fr = fr;
     }
 

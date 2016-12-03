@@ -1,22 +1,38 @@
 package com.gitanosandco.openagenda.agendaviewer.actMain;
 
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.widget.ListAdapter;
 
+import com.gitanosandco.openagenda.agendaviewer.Config;
 import com.gitanosandco.openagenda.agendaviewer.fragInfo.InfoFragment;
 import com.gitanosandco.openagenda.agendaviewer.fragEventList.EventListFragment;
+import com.gitanosandco.openagenda.agendaviewer.fragMap.MapData;
 import com.gitanosandco.openagenda.agendaviewer.fragMap.MapFragment;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 import static com.gitanosandco.openagenda.agendaviewer.Config.NB_TAB;
 
-public class MyPagerAdapteur extends FragmentPagerAdapter {
-    ListAdapter lvAdapter;
+/**
+ * Class taking care of the transitions between fragments of different tabs.
+ * It also listens to changes in mapData to update mapFragment.
+ */
+class MyPagerAdapteur extends FragmentPagerAdapter implements PropertyChangeListener {
+    private ListAdapter lvAdapter;
+    private MapData mapData;
+    private MapFragment mapFragment;
 
-    public MyPagerAdapteur(FragmentManager fm, ListAdapter lvAdapter) {
+    MyPagerAdapteur(FragmentManager fm, ListAdapter lvAdapter, MapData mapData) {
         super(fm);
         this.lvAdapter = lvAdapter;
+        this.mapData = mapData;
+        mapData.addChangeListener(this);
     }
 
     @Override
@@ -24,12 +40,15 @@ public class MyPagerAdapteur extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 EventListFragment eventListFragment = new EventListFragment();
-
                 eventListFragment.setListAdapter(lvAdapter);
-
                 return eventListFragment;
             case 1:
-                return MapFragment.newInstance();
+                mapFragment = MapFragment.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("key",
+                        (ArrayList<? extends Parcelable>) mapData.getEventMarks());
+                mapFragment.setArguments(bundle);
+                return mapFragment;
             case 2:
                 return InfoFragment.newInstance();
             default:
@@ -46,13 +65,24 @@ public class MyPagerAdapteur extends FragmentPagerAdapter {
     public String getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "List";
+                return "Liste";
             case 1:
-                return "Map";
+                return "Carte";
             case 2:
                 return "Info";
             default:
                 return null;
+        }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent event) {
+        if(event.getPropertyName().equals(Config.MAP_DATA)) {
+            if(mapFragment != null) {
+                mapFragment.getArguments().putParcelableArrayList("key",
+                        (ArrayList<? extends Parcelable>) mapData.getEventMarks());
+                mapFragment.updateMap();
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 
-package com.gitanosandco.openagenda.agendaviewer.model;
+package com.gitanosandco.openagenda.agendaviewer.model.agenda;
 
 import java.io.Serializable;
 import java.util.ArrayList;

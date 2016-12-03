@@ -14,17 +14,15 @@ import android.widget.TextView;
 
 import com.gitanosandco.openagenda.agendaviewer.R;
 
-import com.gitanosandco.openagenda.agendaviewer.model.Event;
+import com.gitanosandco.openagenda.agendaviewer.model.agenda.Event;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 
 public class DetailActivity extends AppCompatActivity {
-    private Event event;
-   // public static final String URL= "https://pixabay.com/static/uploads/photo/2014/04/03/10/11/soccer-ball-310065_640.png";
-    public static  String URL;
     private ImageView imgImagen;
 
     private class CargaImagenes extends AsyncTask<String, Void, Bitmap> {
@@ -49,8 +47,7 @@ public class DetailActivity extends AppCompatActivity {
             // TODO Auto-generated method stub
             Log.i("doInBackground" , "Go inn doInBackground");
             String url = params[0];
-            Bitmap imagen = descargarImagen(url);
-            return imagen;
+            return descargarImagen(url);
         }
 
         @Override
@@ -62,15 +59,22 @@ public class DetailActivity extends AppCompatActivity {
             pDialog.dismiss();
         }
         private Bitmap descargarImagen (String imageHttpAddress){
-            URL imageUrl = null;
+            URL imageUrl;
             Bitmap imagen = null;
+            HttpURLConnection conn = null;
             try{
                 imageUrl = new URL(imageHttpAddress);
-                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                conn = (HttpURLConnection) imageUrl.openConnection();
                 conn.connect();
                 imagen = BitmapFactory.decodeStream(conn.getInputStream());
-            }catch(IOException ex){
+            } catch(MalformedURLException ex) {
+                Log.i("imageLoad", "descargarImagen: invalid image URL");
+            } catch(IOException ex) {
                 ex.printStackTrace();
+            } finally {
+                if(conn != null) {
+                    conn.disconnect();
+                }
             }
 
             return imagen;
@@ -92,7 +96,7 @@ public class DetailActivity extends AppCompatActivity {
 
         TextView tv1 = (TextView) findViewById(R.id.a_detail_txtv_test_descrip);
         if(event.getLongDescription()==null){
-            tv1.setText("No description");
+            tv1.setText("No description"+"\n"+"\n"+"\n");
         }
         else{
             tv1.setText(event.getLongDescription().getFr());
@@ -100,7 +104,7 @@ public class DetailActivity extends AppCompatActivity {
 
         TextView tv2 = (TextView) findViewById(R.id.a_detail_txtv_test_conditions);
         if(event.getConditions()==null){
-            tv2.setText("No information about conditions");
+            tv2.setText(R.string.no_info_cond);
         }
         else{
             tv2.setText(event.getConditions().getFr());
@@ -109,7 +113,7 @@ public class DetailActivity extends AppCompatActivity {
 
         TextView tv3 = (TextView) findViewById(R.id.a_detail_txtv_test_city);
         if(event.getConditions()==null){
-            tv3.setText("No information about the city");
+            tv3.setText(R.string.no_info_city);
         }
         else{
             tv3.setText(event.getAddress());
@@ -117,7 +121,7 @@ public class DetailActivity extends AppCompatActivity {
 
        TextView tv4 = (TextView) findViewById(R.id.a_detail_txtv_test_date);
         if(event.getConditions()==null){
-            tv4.setText("No information about dates");
+            tv4.setText(R.string.no_info_dates);
         }
         else{
             tv4.setText(event.getFirstDate());
@@ -126,7 +130,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
         imgImagen = (ImageView)findViewById(R.id.imagen);
-        URL=event.getThumbnail();
+        String URL = event.getThumbnail();
         CargaImagenes nuevaTarea = new CargaImagenes();
         nuevaTarea.execute(URL);
 
